@@ -34,7 +34,17 @@ def scrape_steam_tags(app_id, delay=4):
     except Exception as e:
         print("Timeout")
 
+def save_app_ids(apps):
+    simpleList = []
 
+    for app in apps:
+        app_id = app['appid']
+        app_name = app['name']
+        simpleList.append([app_id, app_name])
+
+    with open('steam_app_ids.json', 'w', encoding="utf-8") as f:
+        json.dump(simpleList, f, ensure_ascii=False, indent=2)
+        
 if __name__ == "__main__":
 
     app_ids = load_app_ids()

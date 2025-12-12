@@ -3,7 +3,7 @@ import requests
 import json
 
 path = ''
-with open("../", "r") as f:
+with open("/", "r") as f:
     STEAM_API_KEY = f.read().strip()
     f.close()
 

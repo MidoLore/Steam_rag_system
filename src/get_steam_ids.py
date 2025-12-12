@@ -7,7 +7,7 @@ with open("../", "r") as f:
     STEAM_API_KEY = f.read().strip()
     f.close()
 
-"Get all Steam game IDs"
+#Get all Steam game IDs
 def get_app_list():
     all_apps = []
     last_appid = 0
@@ -44,6 +44,7 @@ def get_app_list():
 
     return all_apps
 
+#Save Steam games in a json file
 def save_app_ids(apps):
     simpleList = []
 
@@ -59,4 +60,5 @@ def save_app_ids(apps):
 if __name__ == "__main__":
     all_apps = get_app_list()
     save_app_ids(all_apps)
+
 

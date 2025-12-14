@@ -27,5 +27,5 @@ def fetch_game(app_id):
 
 if __name__ == "__main__":
     app_ids = load_app_ids()
-    for app in app_ids:
-        print(app)
+    app = fetch_game(app_ids[43][0])
+    print(app)

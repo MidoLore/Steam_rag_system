@@ -51,10 +51,9 @@ def save_json(game_data):
         json.dump(simpleList, f, ensure_ascii=False, indent=2)
 
 def list_to_dict(game_list):
-    """Convert [[id, name, tags], ...] to {app_id: [id, name, tags]}"""
     game_dict = {}
     for game in game_list:
-        if len(game) >= 3:  # Ensure valid format
+        if len(game) >= 3: 
             app_id = game[0]
             game_dict[app_id] = game
     return game_dict

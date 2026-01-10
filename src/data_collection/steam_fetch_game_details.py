@@ -84,7 +84,6 @@ def retrieve_reviews(game, current_index, total_games):
     }
 
     try:
-        time.sleep(random.uniform(0.5, 1))
 
         response = requests.get(url, params=params)
         if response.status_code == 429:
@@ -129,7 +128,7 @@ def retrieve_reviews(game, current_index, total_games):
         print(f"[{current_index}/{total_games}] ✗ {app_id} {game['name']} (data error: {e})")
         return None
 
-def load_app_ids(filename="../../data/steam_app_data.json"):
+def load_app_ids(filename="../../data/steam_app_data_test.json"):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -141,7 +140,7 @@ def save_app_ids(apps):
 
     print(f" Saved {len(apps)} games as dicts")
 
-def load_existing_data(filename='../../data/steam_app_data_test.json'):
+def load_existing_data(filename='../../data/steam_app_data.json'):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -180,18 +179,16 @@ def normalize_price(game):
 
 
 if __name__ == "__main__":
-    game_catalogue = load_existing_data()
-    gameList = []
+    game_catalogue = load_app_ids()
+    gameList = load_existing_data()
     index = 0
     save_interval = 50
-    START_FROM_ID = 2539730
+    START_FROM_ID = 3560
 
     for game in game_catalogue:
-        '''
         if game['app_id'] <= START_FROM_ID:
             index += 1
             continue
-        '''
 
         gameList.append(retrieve_reviews(game, index, len(game_catalogue)))
         index += 1

@@ -47,7 +47,7 @@ def save_json(game_data):
         app_tags = app['tags']
         simpleList.append([app_id, app_name, app_tags])
 
-    with open('../../data/steam_app_tags_combined.json', 'w', encoding="utf-8") as f:
+    with open('../../data/raw/steam_app_tags_combined.json', 'w', encoding="utf-8") as f:
         json.dump(simpleList, f, ensure_ascii=False, indent=2)
 
 def list_to_dict(game_list):
@@ -60,8 +60,8 @@ def list_to_dict(game_list):
 
 if __name__ == "__main__":
     game_catalogue_combined = []
-    game_catalogue_web = load_json("../../data/steam_app_tags_web.json")
-    game_catalogue_spy = load_json("../../data/steam_app_tags_spy.json")
+    game_catalogue_web = load_json("../../data/raw/steam_app_tags_web.json")
+    game_catalogue_spy = load_json("../../data/raw/steam_app_tags_spy.json")
 
     web_dict = list_to_dict(game_catalogue_web)
     spy_dict = list_to_dict(game_catalogue_spy)

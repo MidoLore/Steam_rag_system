@@ -16,7 +16,6 @@ def fetch_game_data(game, current_index, total_games):
     }
 
     try:
-        time.sleep(random.uniform(1, 2))
         response = requests.get(store_url, params=params, timeout=10)
         response.raise_for_status()
 
@@ -128,6 +127,7 @@ def retrieve_reviews(game, current_index, total_games):
         print(f"[{current_index}/{total_games}] ✗ {app_id} {game['name']} (data error: {e})")
         return None
 
+
 def load_app_ids(filename="../../data/steam_app_data_test.json"):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -135,12 +135,12 @@ def load_app_ids(filename="../../data/steam_app_data_test.json"):
 def save_app_ids(apps):
     cleaned_apps = [app for app in apps if app is not None]
 
-    with open('../../data/steam_app_data.json', 'w', encoding="utf-8") as f:
+    with open('../../data/processed/steam_games.json', 'w', encoding="utf-8") as f:
         json.dump(cleaned_apps, f, ensure_ascii=False, indent=2)
 
     print(f" Saved {len(apps)} games as dicts")
 
-def load_existing_data(filename='../../data/steam_app_data.json'):
+def load_existing_data(filename='../../data/steam_games.json'):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -149,8 +149,9 @@ if __name__ == "__main__":
     gameList = load_existing_data()
     index = 0
     save_interval = 50
-    START_FROM_ID = 3560
+    START_FROM_ID = 4212340
 
+    ''' 
     for game in game_catalogue:
         if game['app_id'] <= START_FROM_ID:
             index += 1
@@ -163,11 +164,10 @@ if __name__ == "__main__":
             save_app_ids(gameList)
             print(f"checkpoint saved at game {index}")
 
+    save_app_ids(gameList)
+
     print(len(game_catalogue))
     print(len(gameList))
-
-    ''' 
-    
     for game in game_catalogue:
         if game['app_id'] == 2420:
             print(fetch_game_data(game, index, len(game_catalogue)))
@@ -185,7 +185,6 @@ if __name__ == "__main__":
             print(f"checkpoint saved at game {index}")
 
     print(gameList)
-
 
     '''
 

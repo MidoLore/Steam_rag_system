@@ -66,7 +66,7 @@ def save_app_ids(apps):
         app_tags = app['tags']
         simpleList.append([app_id, app_name, app_tags])
 
-    with open('../../data/steam_app_tags_web.json', 'w', encoding="utf-8") as f:
+    with open('../../data/raw/steam_app_tags_web.json', 'w', encoding="utf-8") as f:
         json.dump(simpleList, f, ensure_ascii=False, indent=2)
 
 def load_existing_data(filename="steam_app_tags_web.json"):

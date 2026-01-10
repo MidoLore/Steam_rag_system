@@ -144,40 +144,6 @@ def load_existing_data(filename='../../data/steam_app_data.json'):
     with open(filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def normalize_price(game):
-    price_details = game.get("price_details", {})
-    price_str = price_details.get("price")
-
-    # Handle missing price
-    if not price_str:
-        price_details["price"] = None
-        return game
-
-    # Handle free games
-    if isinstance(price_str, str) and "free" in price_str.lower():
-        price_details["price"] = 0.0
-        return game
-
-    match = re.search(r"[\d.,]+", price_str)
-
-    if not match:
-        price_details["price"] = None
-        return game
-
-    number = match.group().replace(",", ".")
-
-    try:
-        price_details["price"] = float(number)
-    except ValueError:
-        price_details["price"] = None
-
-    # Save back into price_details (not game["price"])
-    game["price_details"] = price_details
-
-    return game
-
-
-
 if __name__ == "__main__":
     game_catalogue = load_app_ids()
     gameList = load_existing_data()
